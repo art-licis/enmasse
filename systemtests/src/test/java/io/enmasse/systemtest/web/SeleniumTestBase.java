@@ -16,6 +16,11 @@ import java.net.ServerSocket;
 public class SeleniumTestBase extends TestBase {
     private SeleniumServer server;
 
+    /**
+     * Providing start selenium server
+     * @param config configuration for server
+     * @throws Exception
+     */
     protected void startSeleniumServer(StandaloneConfiguration config) throws Exception {
 
         try {
@@ -37,6 +42,9 @@ public class SeleniumTestBase extends TestBase {
         }
     }
 
+    /**
+     * Stop selenium server
+     */
     protected void stopSeleniumServer() {
         if (server != null) {
             try {
