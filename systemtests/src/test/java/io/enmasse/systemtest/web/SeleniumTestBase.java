@@ -1,5 +1,6 @@
 package io.enmasse.systemtest.web;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import io.enmasse.systemtest.Logging;
 import io.enmasse.systemtest.TestBase;
 import org.junit.After;
@@ -7,11 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.grid.internal.utils.configuration.StandaloneConfiguration;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.server.SeleniumServer;
 
 import java.net.BindException;
@@ -76,12 +74,7 @@ public class SeleniumTestBase extends TestBase {
 
     @Test
     public void testSeleniumServerStartStop() throws Exception {
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
-        firefoxBinary.addCommandLineOptions("--headless");
-        System.setProperty("webdriver.gecko.driver", environment.webdriverDir() +"/geckodriver");
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setBinary(firefoxBinary);
-        WebDriver driver = new FirefoxDriver(firefoxOptions);
+        HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_52);
 
         System.out.println("Firefox is opened");
         driver.get("http://www.google.com");

@@ -26,7 +26,6 @@ public class Environment {
     private final String testLogDir = System.getenv().getOrDefault("OPENSHIFT_TEST_LOGDIR", "/tmp/testlogs");
     private final String keycloakAdminUser = System.getenv().getOrDefault("KEYCLOAK_ADMIN_USER", "admin");
     private final String keycloakAdminPassword = System.getenv("KEYCLOAK_ADMIN_PASSWORD");
-    private final String webdriverDir = System.getenv().getOrDefault("WEBDRIVER_DIR", System.getProperty("user.dir") + "/web_driver");
 
     public String openShiftUrl() {
         return url;
@@ -62,9 +61,5 @@ public class Environment {
         } else {
             return new KeycloakCredentials(keycloakAdminUser, keycloakAdminPassword);
         }
-    }
-
-    public String webdriverDir(){
-        return webdriverDir;
     }
 }
