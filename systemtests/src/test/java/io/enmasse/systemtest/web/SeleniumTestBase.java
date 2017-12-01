@@ -2,6 +2,8 @@ package io.enmasse.systemtest.web;
 
 import io.enmasse.systemtest.Logging;
 import io.enmasse.systemtest.TestBase;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.grid.internal.utils.configuration.StandaloneConfiguration;
 import org.openqa.selenium.By;
@@ -18,6 +20,7 @@ public class SeleniumTestBase extends TestBase {
 
     /**
      * Providing start selenium server
+     *
      * @param config configuration for server
      * @throws Exception
      */
@@ -57,12 +60,20 @@ public class SeleniumTestBase extends TestBase {
         }
     }
 
+    @Before
+    public void setUpWebConsoleTest() throws Exception {
+        StandaloneConfiguration conf = new StandaloneConfiguration();
+        conf.port = 4444;
+        startSeleniumServer(conf);
+    }
+
+    @After
+    public void tearDownWebConsoleTest() throws Exception {
+        stopSeleniumServer();
+    }
+
     @Test
     public void testSeleniumServerStartStop() throws Exception {
-        StandaloneConfiguration conf = new StandaloneConfiguration();
-        conf.port = 4443;
-        startSeleniumServer(conf);
-
         WebDriver driver = new FirefoxDriver();
         System.out.println("Firefox is opened");
         driver.get("http://www.google.com");
@@ -72,6 +83,5 @@ public class SeleniumTestBase extends TestBase {
         element.submit();
         System.out.println("Page title is: " + driver.getTitle());
         driver.close();
-        stopSeleniumServer();
     }
 }
