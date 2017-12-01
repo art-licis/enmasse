@@ -9,7 +9,9 @@ import org.openqa.grid.internal.utils.configuration.StandaloneConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.server.SeleniumServer;
 
 import java.net.BindException;
@@ -74,8 +76,13 @@ public class SeleniumTestBase extends TestBase {
 
     @Test
     public void testSeleniumServerStartStop() throws Exception {
-        System.setProperty("webdriver.gecko.driver", environment.webdriverDir() +"/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
+        System.setProperty("webdriver.gecko.driver", environment.webdriverDir() +"/geckodriver");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setBinary(firefoxBinary);
+        WebDriver driver = new FirefoxDriver(firefoxOptions);
+
         System.out.println("Firefox is opened");
         driver.get("http://www.google.com");
         System.out.println("Google is selected");
