@@ -49,4 +49,7 @@ client_install:
 	npm install -g cli-rhea
 	pip install cli-proton-python
 
+webdriver_install:
+	./systemtests/scripts/install_web_drivers.sh
+
 .PHONY: $(BUILD_TARGETS) $(DOCKER_TARGETS) $(BUILD_DIRS) $(DOCKER_DIRS) build_java deploy systemtests clean_java
