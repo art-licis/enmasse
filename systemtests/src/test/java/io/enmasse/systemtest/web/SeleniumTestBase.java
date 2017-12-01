@@ -74,6 +74,7 @@ public class SeleniumTestBase extends TestBase {
 
     @Test
     public void testSeleniumServerStartStop() throws Exception {
+        System.setProperty("webdriver.gecko.driver", environment.webdriverDir() +"/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         System.out.println("Firefox is opened");
         driver.get("http://www.google.com");
